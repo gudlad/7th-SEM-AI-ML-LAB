@@ -3,19 +3,19 @@ import statistics as st
 from statistics import stdev
 
 def loadCsv(filename):
-    lines = csv.reader(open(filename, "r"));
+    lines = csv.reader(open(filename, "r"))
     dataset = list(lines)
     for i in range(len(dataset)):
         dataset[i] = [float(x) for x in dataset[i]]
     return dataset
 
 def splitDataset(dataset, splitRatio):
-    testSize = int(len(dataset) * splitRatio);
-    trainSet = list(dataset);
+    testSize = int(len(dataset) * splitRatio)
+    trainSet = list(dataset)
     testSet = []
     while len(testSet) < testSize:
 #randomly pick an instance from training data
-        index = random.randrange(len(trainSet));
+        index = random.randrange(len(trainSet))
         testSet.append(trainSet.pop(index))
     return [trainSet, testSet]
 
@@ -39,7 +39,7 @@ def stdev(numbers):
     return math.sqrt(variance)
 
 def compute_mean_std(dataset):
-    mean_std = [(st.mean(attribute), st.stdev(attribute))for attribute in zip(*dataset)];
+    mean_std = [(st.mean(attribute), st.stdev(attribute))for attribute in zip(*dataset)]
     del mean_std[-1] # Exclude label
     return mean_std
 
@@ -65,7 +65,7 @@ def calculateClassProbabilities(summaries, testVector):
         for i in range(len(classSummaries)):
             mean, stdev = classSummaries[i]
             x = testVector[i] #testvector's first attribute
-            p[classValue] *= estimateProbability(x, mean, stdev);
+            p[classValue] *= estimateProbability(x, mean, stdev)
     return p
 def predict(summaries, testVector):
     all_p = calculateClassProbabilities(summaries, testVector)
@@ -90,7 +90,7 @@ def getAccuracy(testSet, predictions):
             correct += 1
     return(correct/float(len(testSet))) * 100.0
 
-dataset = loadCsv('pima-indians-diabetes.csv');
+dataset = loadCsv('pima-indians-diabetes.csv')
 print('Pima Indian Diabetes Dataset loaded...')
 print('Total instances available :',len(dataset))
 print('Total attributes present :',len(dataset[0])-1)
