@@ -30,7 +30,7 @@ def graphplot(X,ypred):
     ax.plot(xsort[:,1],ypred[sortindex],color='red',linewidth=4)
     plt.xlabel('Total Bill')
     plt.ylabel('Tip')
-    plt.show();
+    plt.show()
 
 data=pd.read_csv('data10_tips.csv')
 bill=np.array(data.total_bill)
