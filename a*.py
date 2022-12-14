@@ -1,24 +1,34 @@
 def aStarAlgo(start_node, stop_node):
     open_set = set(start_node)
     closed_set = set()
-    g = {}
+    g = {}  # actual cost
     parents = {}
     g[start_node] = 0
     parents[start_node] = start_node
+
     while len(open_set) > 0:
         n = None
-        for v in open_set:
+
+        for v in open_set:  # deciding the optimal neighbors b/w A,B ie the BESTNODE
             if n == None or g[v] + heuristic(v) < g[n] + heuristic(n):
-                n = v
+                n = v  # n = S (BESTNODE)
+
         if n == stop_node or Graph_nodes[n] == None:
             pass
         else:
             for (m, weight) in get_neighbors(n):
+                # generate the successors of
+                # BESTNODE
                 if m not in open_set and m not in closed_set:
                     open_set.add(m)
                     parents[m] = n
+                    # g(SUCCESSOR) = g(BESTNODE)+the cost of getting from BESTNODE to SUCCESSOR.
                     g[m] = g[n] + weight
                 else:
+                    # If SUCCESSOR is same as the node on OPEN, then
+                    # take this OLD node to the BESTNODE and update
+                    # If the successor not on OPEN, but in CLOSED, then remove it from CLOSED and add it to  OPEN
+
                     if g[m] > g[n] + weight:
                         g[m] = g[n] + weight
                         parents[m] = n
@@ -26,14 +36,17 @@ def aStarAlgo(start_node, stop_node):
                             closed_set.remove(m)
                             open_set.add(m)
         if n == None:
+            # If no node on OPEN, report failure.
             print('Path does not exist!')
             return None
         if n == stop_node:
+            print(n)
+            print(parents)
             path = []
-            while parents[n] != n:
+            while parents[n] != n:  # E B S!=S
                 path.append(n)
                 n = parents[n]
-            path.append(start_node)
+            path.append(start_node)  # S
             path.reverse()
             print('Path found: {}'.format(path))
             return path
