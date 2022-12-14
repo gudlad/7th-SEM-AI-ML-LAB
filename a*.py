@@ -26,7 +26,7 @@ def aStarAlgo(start_node, stop_node):
                     g[m] = g[n] + weight
                 else:
                     # If SUCCESSOR is same as the node on OPEN, then
-                    # take this OLD node to the BESTNODE and update
+                    # take this OLD node to the BESTNODE and update cost value.
                     # If the successor not on OPEN, but in CLOSED, then remove it from CLOSED and add it to  OPEN
 
                     if g[m] > g[n] + weight:
