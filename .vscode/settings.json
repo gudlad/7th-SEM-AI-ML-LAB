@@ -1,3 +1,11 @@
 {
-  "cSpell.words": ["BESTNODE"]
+  "cSpell.words": [
+    "amax",
+    "BESTNODE",
+    "dtype",
+    "hiddengrad",
+    "outgrad",
+    "propogation",
+    "wout"
+  ]
 }
