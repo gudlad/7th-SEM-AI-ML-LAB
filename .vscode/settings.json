@@ -5,7 +5,6 @@
     "dtype",
     "hiddengrad",
     "outgrad",
-    "propogation",
-    "wou"
+    "propogation"
   ]
 }
