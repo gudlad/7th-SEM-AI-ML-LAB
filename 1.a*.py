@@ -9,7 +9,7 @@ def aStarAlgo(start_node, stop_node):
     while len(open_set) > 0:
         n = None
 
-        for v in open_set:  # deciding the optimal neighbors b/w A,B ie the BESTNODE
+        for v in open_set:  # deciding the optimal neighbors n b/w A,B ie the BESTNODE
             if n == None or g[v] + heuristic(v) < g[n] + heuristic(n):
                 n = v  # n = S (BESTNODE)
 
@@ -22,13 +22,12 @@ def aStarAlgo(start_node, stop_node):
                 if m not in open_set and m not in closed_set:
                     open_set.add(m)
                     parents[m] = n
-                    # g(SUCCESSOR) = g(BESTNODE)+the cost of getting from BESTNODE to SUCCESSOR.
+                    # g(SUCCESSOR) = g(BESTNODE)+ the cost of getting from BESTNODE to SUCCESSOR.
                     g[m] = g[n] + weight
                 else:
                     # If SUCCESSOR is same as the node on OPEN, then
                     # take this OLD node to the BESTNODE and update cost value.
                     # If the successor not on OPEN, but in CLOSED, then remove it from CLOSED and add it to  OPEN
-
                     if g[m] > g[n] + weight:
                         g[m] = g[n] + weight
                         parents[m] = n
@@ -40,14 +39,14 @@ def aStarAlgo(start_node, stop_node):
             print('Path does not exist!')
             return None
         if n == stop_node:
-            print(n)
-            print(parents)
+            # print(n)
+            # print(parents)
             path = []
-            while parents[n] != n:  # E B S!=S
-                path.append(n)
+            while parents[n] != n:   # B != E, S!=B
+                path.append(n)       # [E, B]
                 n = parents[n]
-            path.append(start_node)  # S
-            path.reverse()
+            path.append(start_node)  # S -->[E,B,S]
+            path.reverse()           # [S,B,E]
             print('Path found: {}'.format(path))
             return path
         open_set.remove(n)
@@ -75,7 +74,7 @@ def heuristic(n):
 
 Graph_nodes = {
     'S': [('A', 1), ('B', 2)],
-    'A': [('E', 13), ],
+    'A': [('E', 13)],
     'B': [('E', 5)]
 }
 aStarAlgo('S', 'E')
