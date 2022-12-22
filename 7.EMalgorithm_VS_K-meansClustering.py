@@ -4,7 +4,7 @@
 
 # Gaussian Mixture Models (GMMs)
 from sklearn.mixture import GaussianMixture
-from sklearn.cluster import KMeans
+from sklearn.cluster import KMeans  # UnSupervised Learning ALgorithm
 from sklearn import preprocessing  # converts raw data to preprocessed data
 from sklearn import datasets
 
@@ -22,6 +22,7 @@ X.columns = ['Sepal_Length', 'Sepal_Width', 'Petal_Length',
 y = pd.DataFrame(iris.target)
 y.columns = ['Targets']
 
+# *******************************************************
 # * Visualize the clustering results
 plt.figure(figsize=(14, 14))
 colormap = np.array(['red', 'lime', 'black'])

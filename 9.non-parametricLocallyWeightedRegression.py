@@ -4,7 +4,7 @@ import numpy as np
 
 
 def kernel(point, xmat, k):  # gives the value of W
-    m, n = np.shape(xmat)
+    m, n = np.shape(xmat)  # 244 2
     weights = np.mat(np.eye((m)))  # identity matrix
     for j in range(m):
         diff = point - X[j]
@@ -20,7 +20,7 @@ def localWeight(point, xmat, ymat, k):  # beta = (X^T W X)^-1 X^T W y
 
 def localweightregression(xmat, ymat, k):  # (bill_amount,tips,k)
     m, n = np.shape(xmat)  # 244 2
-    ypred = np.zeros(m)
+    ypred = np.zeros(m)  # 244
     for i in range(m):
         ypred[i] = xmat[i] * localWeight(xmat[i], xmat, ymat, k)
         # Prediction= xO * beta
@@ -37,12 +37,13 @@ def graphplot(X, ypred):  # (bill amount,predicted tips amount)
     print('xsort', xsort)
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
-    ax.scatter(bill, tip, color='green')
-    ax.plot(xsort[:, 1], ypred[sortindex], color='red', linewidth=4)
+    ax.scatter(bill, tip, color='green')  # to draw points
+    ax.plot(xsort[:, 1], ypred[sortindex], color='red',
+            linewidth=4)  # to draw the line
 
     plt.xlabel('Total Bill')
     plt.ylabel('Tip')
-    # plt.show()
+    plt.show()
 
 
 data = pd.read_csv('data10_tips.csv')
@@ -50,12 +51,22 @@ data = pd.read_csv('data10_tips.csv')
 bill = np.array(data.total_bill)
 tip = np.array(data.tip)
 
-mbill = np.mat(bill)
-mtip = np.mat(tip)
+mbill = np.mat(bill)  # bill matrix 1,244
+mtip = np.mat(tip)  # tip matrix 1,244
 
-m = np.shape(mbill)[1]
-one = np.mat(np.ones(m))
-X = np.hstack((one.T, mbill.T))  # 244 rows 2 columns
-print(X)
+# print(np.shape(mbill))
+# print(np.shape(mtip))
+
+m = np.shape(mbill)[1]  # 244
+one = np.mat(np.ones(m))  # 1,244  matrix
+
+# print(mbill)
+# print(one)
+# print(mbill.T)
+# print(one.T)
+# print(np.shape(mbill.T))  244,1 matrix
+# print(np.shape(one.T))    244,1 matrix
+
+X = np.hstack((one.T, mbill.T))  # after joining 244 rows 2 columns
 ypred = localweightregression(X, mtip, 0.5)  # increase to get smooth curve
 graphplot(X, ypred)

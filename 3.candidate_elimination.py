@@ -50,7 +50,7 @@ def learn(concepts, target):
     # remove list items containing only question marks
     indices = [index for index, val in enumerate(general_h) if val == [
         '?', '?', '?', '?', '?', '?']]
-    for i in indices:
+    for i in range(len(indices)):
         general_h.remove(['?', '?', '?', '?', '?', '?'])
 
     return specific_h, general_h

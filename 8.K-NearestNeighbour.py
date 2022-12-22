@@ -4,16 +4,16 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 
 iris = datasets.load_iris()
-print("\n IRIS FEATURES \ TARGET NAMES: \n ", iris.target_names)
+# print("\n IRIS FEATURES \ TARGET NAMES: \n ", iris.target_names)
 
 for i in range(len(iris.target_names)):
     print("\n[{0}]:[{1}]".format(i, iris.target_names[i]))
 
-print("\n IRIS DATA :\n", iris.data)
 
 X_train, X_test, y_train, y_test = train_test_split(
     iris.data, iris.target, random_state=0)
 
+print("\n IRIS DATA :\n", iris.data)
 print("\n Target :\n", iris.target)
 print("\n X TRAIN \n", X_train)
 print("\n X TEST \n", X_test)
