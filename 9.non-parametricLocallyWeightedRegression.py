@@ -23,7 +23,7 @@ def localweightregression(xmat, ymat, k):  # (bill_amount,tips,k)
     ypred = np.zeros(m)  # 244
     for i in range(m):
         ypred[i] = xmat[i] * localWeight(xmat[i], xmat, ymat, k)
-        # Prediction= xO * beta
+        # Prediction, ypred = xO * beta
     return ypred
 
 

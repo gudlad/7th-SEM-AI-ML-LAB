@@ -1,21 +1,33 @@
 class Graph:
-    def __init__(self, graph, heuristicNodeList, startNode): #instantiate graph object with graph topology, heuristic values, start node
+    def __init__(self, graph, heuristicNodeList, startNode):    #instantiate graph object with graph topology, heuristic values,   start node
+        # data members
         self.graph = graph
         self.H=heuristicNodeList
         self.start=startNode
         self.parent={}
-        self.status={}
-        self.solutionGraph={}
+        self.status={} 
+        # Every node has status value associated with it
+        # when status = -1 when we reach terminal or already explored
+        # default status is 0
+        # for A status = 2 (as it has 2 child nodes (optimum) )
+        # for B status = 1
+        self.solutionGraph={} # final graph we get
+        
     def applyAOStar(self): # starts a recursive AO* algorithm
-        self.aoStar(self.start, False)
+        self.aoStar(self.start, False) # here False denotes that we are not doing backtracking...
+        
     def getNeighbors(self, v): # gets the Neighbors of a given node
         return self.graph.get(v,'')
+    
     def getStatus(self,v): # return the status of a given node
         return self.status.get(v,0)
+    
     def setStatus(self,v, val): # set the status of a given node
         self.status[v]=val
+        
     def getHeuristicNodeValue(self, n):
         return self.H.get(n,0) # always return the heuristic value of a given node
+    
     def setHeuristicNodeValue(self, n, value):
         self.H[n]=value # set the revised heuristic value of a given node
 

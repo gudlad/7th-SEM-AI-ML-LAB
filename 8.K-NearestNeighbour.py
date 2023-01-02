@@ -23,7 +23,7 @@ print("\n Y TEST \n", y_test)
 kn = KNeighborsClassifier(n_neighbors=1)
 kn.fit(X_train, y_train)
 
-x_new = np.array([[5, 2.9, 1, 0.2]])
+x_new = np.array([[5, 2.9, 1, 0.2]]) # we have PASS to 2D ARRAY
 # [Sepal Length, Sepal Width,Petal Length,Petal Width]
 print("\n XNEW \n", x_new)
 
